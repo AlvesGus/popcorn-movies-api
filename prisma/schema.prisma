@@ -7,10 +7,8 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Movie {
+model Movies {
   id      String @id @default(uuid())
   userId  String
   movieId String
-
-  @@map("movies")
 }
