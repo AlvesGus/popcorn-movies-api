@@ -3,7 +3,7 @@ import { server } from '../server'
 import { DataProps } from '../utils/types'
 import { prisma } from '../lib/prisma'
 
-export async function CreateNewFavoriteMovie() {
+export function CreateNewFavoriteMovie() {
   server.post(
     '/movies/favorite/create',
     async (req: FastifyRequest, reply: FastifyReply) => {
