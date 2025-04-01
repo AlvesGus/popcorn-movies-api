@@ -10,18 +10,24 @@ export async function DeleteFavoriteMovies() {
       const { userId, movieId } = req.params as DataProps
 
       try {
-        await prisma.movies.delete({
+        const movieToDelete = await prisma.movies.findFirst({
           where: {
-            userId_movieId: {
-              userId,
-              movieId
-            }
+            userId,
+            movieId
           }
         })
+        if (!movieToDelete) {
+          return reply.status(404).send({ error: 'Movie not found' })
+        }
+        await prisma.movies.delete({
+          where: {
+            id: movieToDelete.id
+          }
+        })
+        return reply.status(200).send('Movie deleted from favorites')
       } catch (error) {
-        console.log('Error deleting favorite movie:', error)
+        console.error('Error deleting favorite movie:', error)
         return reply.status(500).send({ error: 'Internal server error' })
       }
-    }
-  )
+    })
 }

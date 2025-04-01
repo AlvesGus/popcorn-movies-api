@@ -14,10 +14,10 @@ export function GetFavoriteMoviesUser() {
             userId
           }
         })
-        res.status(200).send(favoriteMovies)
+        reply.status(200).send(favoriteMovies)
       } catch (error) {
         console.error('Error fetching favorite movies:', error)
-        res.status(500).send({ error: 'Internal server error' })
+        reply.status(500).send({ error: 'Internal server error' })
       }
     }
   )
